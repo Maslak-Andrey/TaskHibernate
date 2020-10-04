@@ -2,6 +2,7 @@ package jm.task.core.jdbc.dao;
 
 import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
+import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -22,7 +23,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try {
             Query query = session.createSQLQuery(sql);
             query.executeUpdate();
-        }catch (Throwable e){
+        }catch (HibernateException e){
             //continue
         }finally {
             session.close();
@@ -36,7 +37,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try {
             session.createSQLQuery(sql).executeUpdate();
             session.close();
-        }catch (Throwable e){
+        }catch (HibernateException e){
             //continue
         }
     }
